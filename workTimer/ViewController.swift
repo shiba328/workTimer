@@ -66,6 +66,7 @@ class ViewController: UIViewController {
                 self.errorLabel.isHidden = false
                 self.errorLabel.text = error.localizedDescription
                 self.errorLabel.sizeToFit()
+                self.overlay?.removeFromSuperview()
                 return
             }
             // 成功したので、スレッドを表示する.
@@ -93,7 +94,10 @@ class ViewController: UIViewController {
         mailField.backgroundColor = UIColor.clear
         mailField.returnKeyType = .done
         mailField.delegate = self
-        mailField.placeholder = "メールアドレス"
+        mailField.autocorrectionType = .no
+        mailField.autocapitalizationType = .none
+        mailField.spellCheckingType = .no
+        mailField.attributedPlaceholder = NSAttributedString(string: "メールアドレス", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
         mailField.borderStyle = .roundedRect
         mailField.layer.cornerRadius = 5.0
         mailField.layer.borderColor = UIColor.white.cgColor
@@ -110,7 +114,7 @@ class ViewController: UIViewController {
         pwField.returnKeyType = .done
         pwField.delegate = self
         pwField.backgroundColor = UIColor.clear
-        pwField.placeholder = "パスワード"
+        pwField.attributedPlaceholder = NSAttributedString(string: "パスワード", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
         pwField.borderStyle = .roundedRect
         pwField.layer.cornerRadius = 5.0
         pwField.layer.borderColor = UIColor.white.cgColor
