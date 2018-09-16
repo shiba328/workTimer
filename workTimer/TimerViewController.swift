@@ -8,6 +8,8 @@
 
 import UIKit
 import Foundation
+import Firebase
+
 class TimerViewController: UIViewController{
     var navBar: UINavigationBar!
     var headview: UIView!
@@ -16,7 +18,16 @@ class TimerViewController: UIViewController{
     var headBtn: UIButton!
     var headDram: UIButton!
     var headInpt: UITextField!
+    var scrollView: UIScrollView!
+    var tableView: UITableView!
     var Timer = Foundation.Timer()
+    //
+    var ref: DatabaseReference!
+    var snap: DataSnapshot!
+    var items: [[String : Any]] = []
+    var uid: String!
+    
+    
     var count: Int = 0 {
         //カウンタが更新されるたびにセットする
         didSet{
@@ -28,12 +39,62 @@ class TimerViewController: UIViewController{
     }
     
     override func viewDidLoad() {
+        self.ref = Database.database().reference()
+        //ユーザーID
+        let user = Auth.auth().currentUser
+        self.uid = user?.uid
         configNavbar()
         configHead()
         configCounter()
         configHeadBtn()
         configHeadDram()
         configHeagInput()
+        configOverscroll()
+        configTableView()
+        getDatebase()
+    }
+    //firebaseのデータ取得
+    func getDatebase(){
+        //.valueはFIRDataEventTypeドキュメント参考：データに何らかの変化があったとき取得
+        ref.child("users/\(self.uid!)/timer").observe(.value, with: { (snapshot) in
+            //書く投稿の子オブジェクトを全部取得
+            if snapshot.children.allObjects is [DataSnapshot] {
+                //snapshotを保存
+                self.snap = snapshot
+                //そのsnapshotをテーブルに送る
+                self.reload(snap: self.snap)
+            }
+        })
+    }
+    //firebaseのデータ表示
+    func reload(snap: DataSnapshot){
+        //snapshotが存在したら
+        if snap.exists(){
+            //Itemsの中身全消し
+            items.removeAll()
+            //snapの子毎に回す
+            for itemSnapShot in snap.children {
+                let item = itemSnapShot as! DataSnapshot
+                let dict = item.value as? [String:Any]
+                self.items.append(dict!)
+            }
+//            tableView.reloadData()
+        }
+    }
+    func configTableView(){
+        tableView = UITableView()
+        
+        tableView.frame = CGRect(x:0, y:0, width:self.scrollView.bounds.width, height:100)
+        self.scrollView.addSubview(tableView)
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func configOverscroll(){
+        scrollView = UIScrollView()
+        scrollView.frame = CGRect(x:0 ,y:self.headview.bounds.height, width:self.view.bounds.width, height:self.view.bounds.height-self.headview.bounds.height-40)
+        scrollView.backgroundColor = UIColor.lightGray
+        self.headview.addSubview(scrollView)
     }
     func configHeagInput(){
         headInpt = UITextField()
@@ -91,7 +152,16 @@ class TimerViewController: UIViewController{
 
     //右側のボタンが押されたら呼ばれる
     @objc internal func rigthBarBtnClicked(sender: UIButton){
-        print("roghtBarBtnClicked")
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.moveStoryboard(name: "Main")
+            }
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
     }
     @objc func onTapStart(sender: UIButton){
         switch sender.tag
@@ -107,7 +177,12 @@ class TimerViewController: UIViewController{
             sender.backgroundColor = UIColor.orange
             sender.tag = 1
             Timer.invalidate()
-            stopTimer()
+            let body: String = self.headInpt.text!
+            let time: Int = self.count
+            let pid: Int = 1
+            if self.count > 1 {
+                stopTimer(body: body, time: time, pid: pid)
+            }
             break
         case 3:
             break
@@ -124,8 +199,20 @@ class TimerViewController: UIViewController{
     @objc func UpdateTimer(){
         count = count + 1
     }
-    func stopTimer(){
-        print(self.headInpt.text, count)
+    func stopTimer(body: String,time: Int,pid: Int){
+        let data = [
+            "body": body,
+            "time": time,
+            "pid": pid
+            ] as [String : Any]
+        ref.child("users/\(self.uid!)/timer").childByAutoId().setValue(data)
+        self.count = 0
+        self.headInpt.text = ""
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // ユーザがキーボード以外の場所をタップすると、キーボードを閉じる
+        self.view.endEditing(true)
+    }
+
 }
 
