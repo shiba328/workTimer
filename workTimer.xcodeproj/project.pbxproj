@@ -14,6 +14,9 @@
 		52858871214D39B500055191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5285886F214D39B500055191 /* Main.storyboard */; };
 		52858873214D39B600055191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52858872214D39B600055191 /* Assets.xcassets */; };
 		52858876214D39B600055191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52858874214D39B600055191 /* LaunchScreen.storyboard */; };
+		52A2F401214D8C71008B93BA /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A2F400214D8C71008B93BA /* DeviceConst.swift */; };
+		52A2F403214D98E4008B93BA /* Timer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A2F402214D98E4008B93BA /* Timer.storyboard */; };
+		52A2F405214D9904008B93BA /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A2F404214D9904008B93BA /* TimerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		52858872214D39B600055191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52858875214D39B600055191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52858877214D39B600055191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52A2F400214D8C71008B93BA /* DeviceConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConst.swift; sourceTree = "<group>"; };
+		52A2F402214D98E4008B93BA /* Timer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Timer.storyboard; sourceTree = "<group>"; };
+		52A2F404214D9904008B93BA /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		DBA4716B35242EBEECD86A1D /* Pods_workTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_workTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,6 +84,9 @@
 				52858872214D39B600055191 /* Assets.xcassets */,
 				52858874214D39B600055191 /* LaunchScreen.storyboard */,
 				52858877214D39B600055191 /* Info.plist */,
+				52A2F400214D8C71008B93BA /* DeviceConst.swift */,
+				52A2F402214D98E4008B93BA /* Timer.storyboard */,
+				52A2F404214D9904008B93BA /* TimerViewController.swift */,
 			);
 			path = workTimer;
 			sourceTree = "<group>";
@@ -151,6 +160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A2F403214D98E4008B93BA /* Timer.storyboard in Resources */,
 				52858876214D39B600055191 /* LaunchScreen.storyboard in Resources */,
 				524AB040214D443E00339D2E /* GoogleService-Info.plist in Resources */,
 				52858873214D39B600055191 /* Assets.xcassets in Resources */,
@@ -170,6 +180,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-workTimer/Pods-workTimer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SpringIndicator/SpringIndicator.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -177,6 +188,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpringIndicator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -210,8 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A2F405214D9904008B93BA /* TimerViewController.swift in Sources */,
 				5285886E214D39B500055191 /* ViewController.swift in Sources */,
 				5285886C214D39B500055191 /* AppDelegate.swift in Sources */,
+				52A2F401214D8C71008B93BA /* DeviceConst.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +380,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shiba.workTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -385,7 +399,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shiba.workTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
