@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var overlay : UIView?
 
     override func viewWillAppear(_ animated: Bool) {
+        self.configureObserver()
         super.viewWillAppear(animated)
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if (user != nil) {
@@ -58,7 +59,7 @@ class ViewController: UIViewController {
             return
         }
         //overレイ
-        DeviceConst().overlay(view: self.view)
+        configOverlay()
 
         //認証
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -74,6 +75,19 @@ class ViewController: UIViewController {
                 appDelegate.moveStoryboard(name: "Timer")
             }
         }
+    }
+    func configOverlay(){
+        self.overlay = UIView()
+        let indicator = SpringIndicator(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        indicator.lineColors = [.cyan, .gray, .magenta, .yellow]
+        indicator.lineWidth = 8
+        indicator.center = view.center
+        self.overlay?.addSubview(indicator)
+        indicator.start()
+        
+        self.overlay?.frame = CGRect(x:0, y:0, width:view.bounds.width, height:view.bounds.height)
+        self.overlay?.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+        view.addSubview(self.overlay!)
     }
     //Form設定
     func configFrom(){
@@ -164,7 +178,7 @@ class ViewController: UIViewController {
                 mySharpFilter!.setValue(ciImage, forKey: kCIInputImageKey)
                 mySharpFilter!.setValue(CIColor(red: 0.75, green: 0.75, blue: 0.75), forKey: "inputColor")
                 mySharpFilter!.setValue(NSNumber(value: 1.0), forKey: "inputIntensity")
-                print("ok4")
+
                 
                 // フィルターを通した画像をアウトプット.
                 //修正前let image2 = UIImage(CIImage: mySharpFilter!.outputImage!)
@@ -180,7 +194,36 @@ class ViewController: UIViewController {
             }
         }
     }
+    // Notificationを設定
+    func configureObserver() {
+        
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        notification.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
 
+    // キーボードが消えたときに、画面を戻す
+    @objc func keyboardWillHide(notification: Notification?) {
+        
+        let duration: TimeInterval? = notification?.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? Double
+        UIView.animate(withDuration: duration!, animations: { () in
+            
+            self.view.transform = CGAffineTransform.identity
+        })
+    }
+    
+    // キーボードが現れた時に、画面全体をずらす。
+    @objc func keyboardWillShow(notification: Notification?) {
+        
+        let rect = (notification?.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+        let duration: TimeInterval? = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
+        UIView.animate(withDuration: duration!, animations: { () in
+            let transform = CGAffineTransform(translationX: 0, y: -(rect?.size.height)!)
+            self.view.transform = transform
+            
+        })
+    }
+    
 }
 
 extension ViewController: UITextFieldDelegate{
@@ -194,6 +237,12 @@ extension ViewController: UITextFieldDelegate{
         }
         return true
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // ユーザがキーボード以外の場所をタップすると、キーボードを閉じる
+        self.view.endEditing(true)
+    }
+    
+    
 }
 
 
