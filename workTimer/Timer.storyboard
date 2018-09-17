@@ -86,7 +86,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem id="bMl-tL-CKy">
-                                        <barButtonItem key="rightBarButtonItem" title="Item" image="menu" id="CHA-l9-5iu"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="menu" id="CHA-l9-5iu">
+                                            <connections>
+                                                <action selector="menu:" destination="XAZ-D7-Szy" id="BjI-Sb-arG"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -175,6 +179,7 @@
                         <viewLayoutGuide key="safeArea" id="QWe-PE-nVa"/>
                     </view>
                     <connections>
+                        <outlet property="choiceBtn" destination="DcM-LH-05l" id="NG9-x9-418"/>
                         <outlet property="counterLabel" destination="Dvi-H1-Ca2" id="iwN-j5-obI"/>
                         <outlet property="headInp" destination="GSS-Hr-xec" id="hP0-gX-moQ"/>
                         <outlet property="tableView" destination="bxa-HU-MPV" id="eg9-US-zhk"/>

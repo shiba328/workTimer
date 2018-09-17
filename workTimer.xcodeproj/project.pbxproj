@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		4D6073193184F0C731F27D87 /* Pods_workTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA4716B35242EBEECD86A1D /* Pods_workTimer.framework */; };
 		524AB040214D443E00339D2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 524AB03F214D443E00339D2E /* GoogleService-Info.plist */; };
+		52639505214F5AE200B50E6F /* TimerViewController+UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52639504214F5AE200B50E6F /* TimerViewController+UINavigationBar.swift */; };
+		52639507214F5C3700B50E6F /* TimerViewController+UIHeadNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52639506214F5C3700B50E6F /* TimerViewController+UIHeadNavigationBar.swift */; };
+		52639509214F644900B50E6F /* TimerViewController+UITabelview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52639508214F644900B50E6F /* TimerViewController+UITabelview.swift */; };
+		5263950B214F983900B50E6F /* TimerViewSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263950A214F983900B50E6F /* TimerViewSecondViewController.swift */; };
+		5263950D214F999400B50E6F /* Modal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5263950C214F999400B50E6F /* Modal.storyboard */; };
 		5285886C214D39B500055191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5285886B214D39B500055191 /* AppDelegate.swift */; };
 		5285886E214D39B500055191 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5285886D214D39B500055191 /* ViewController.swift */; };
 		52858871214D39B500055191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5285886F214D39B500055191 /* Main.storyboard */; };
@@ -22,6 +27,11 @@
 		12DFB41889577393A3376544 /* Pods-workTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-workTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-workTimer/Pods-workTimer.debug.xcconfig"; sourceTree = "<group>"; };
 		1940D83EE531F9DF00263161 /* Pods-workTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-workTimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-workTimer/Pods-workTimer.release.xcconfig"; sourceTree = "<group>"; };
 		524AB03F214D443E00339D2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		52639504214F5AE200B50E6F /* TimerViewController+UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerViewController+UINavigationBar.swift"; sourceTree = "<group>"; };
+		52639506214F5C3700B50E6F /* TimerViewController+UIHeadNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerViewController+UIHeadNavigationBar.swift"; sourceTree = "<group>"; };
+		52639508214F644900B50E6F /* TimerViewController+UITabelview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerViewController+UITabelview.swift"; sourceTree = "<group>"; };
+		5263950A214F983900B50E6F /* TimerViewSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewSecondViewController.swift; sourceTree = "<group>"; };
+		5263950C214F999400B50E6F /* Modal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Modal.storyboard; sourceTree = "<group>"; };
 		52858868214D39B500055191 /* workTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5285886B214D39B500055191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5285886D214D39B500055191 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +93,12 @@
 				52858874214D39B600055191 /* LaunchScreen.storyboard */,
 				52858877214D39B600055191 /* Info.plist */,
 				52A2F402214D98E4008B93BA /* Timer.storyboard */,
+				5263950C214F999400B50E6F /* Modal.storyboard */,
+				52639504214F5AE200B50E6F /* TimerViewController+UINavigationBar.swift */,
+				52639506214F5C3700B50E6F /* TimerViewController+UIHeadNavigationBar.swift */,
+				52639508214F644900B50E6F /* TimerViewController+UITabelview.swift */,
 				52A2F404214D9904008B93BA /* TimerViewController.swift */,
+				5263950A214F983900B50E6F /* TimerViewSecondViewController.swift */,
 			);
 			path = workTimer;
 			sourceTree = "<group>";
@@ -162,6 +177,7 @@
 				524AB040214D443E00339D2E /* GoogleService-Info.plist in Resources */,
 				52858873214D39B600055191 /* Assets.xcassets in Resources */,
 				52858871214D39B500055191 /* Main.storyboard in Resources */,
+				5263950D214F999400B50E6F /* Modal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +237,10 @@
 			files = (
 				52A2F405214D9904008B93BA /* TimerViewController.swift in Sources */,
 				5285886E214D39B500055191 /* ViewController.swift in Sources */,
+				5263950B214F983900B50E6F /* TimerViewSecondViewController.swift in Sources */,
+				52639507214F5C3700B50E6F /* TimerViewController+UIHeadNavigationBar.swift in Sources */,
+				52639505214F5AE200B50E6F /* TimerViewController+UINavigationBar.swift in Sources */,
+				52639509214F644900B50E6F /* TimerViewController+UITabelview.swift in Sources */,
 				5285886C214D39B500055191 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
